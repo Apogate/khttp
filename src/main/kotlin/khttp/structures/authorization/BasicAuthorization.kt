@@ -5,12 +5,14 @@
  */
 package khttp.structures.authorization
 
-import java.util.Base64
+import android.util.Base64
+//import java.util.Base64
 
 data class BasicAuthorization(val user: String, val password: String) : Authorization {
     override val header: Pair<String, String>
         get() {
-            val b64 = Base64.getEncoder().encode("${this.user}:${this.password}".toByteArray()).toString(Charsets.UTF_8)
+            val b64 = Base64.encodeToString("${username}:${password}".toByteArray(), NO_WRAP)
+            //val b64 = Base64.getEncoder().encode("${this.user}:${this.password}".toByteArray()).toString(Charsets.UTF_8)
             return "Authorization" to "Basic $b64"
         }
 }
